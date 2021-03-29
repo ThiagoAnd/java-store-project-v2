@@ -1,5 +1,7 @@
 package com.wipro.thiago.models;
 
+
+
 public class Variant {
 	
 
