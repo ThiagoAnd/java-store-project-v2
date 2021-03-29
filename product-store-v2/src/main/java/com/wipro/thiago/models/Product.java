@@ -8,13 +8,13 @@ public class Product {
 	private double price;
 	private String description;
 	private int quantity;
-	private List<String> images;
+	private List<Image> images;
 	private Variant variant;
 	
 
 	
 	
-	public Product(String name, double price, String description, int quantity, List<String> images, Variant variant) {
+	public Product(String name, double price, String description, int quantity, List<Image> images, Variant variant) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
@@ -64,12 +64,12 @@ public class Product {
 	}
 
 
-	public List<String> getImages() {
+	public List<Image> getImages() {
 		return images;
 	}
 
 
-	public void setImages(List<String> images) {
+	public void setImages(List<Image> images) {
 		this.images = images;
 	}
 
@@ -84,19 +84,19 @@ public class Product {
 	}
 
 
+
+	
+	
 	@Override
 	public String toString() {
-		return 	"\nName=" + name +
-				"\nPrice=" + price +
-				"\nDescription=" + description +
-				"\nQuantity=" + quantity
-				;
+		return "Product {\n\tname=" + name + ", \n\tprice=" + price + ", \n\tdescription=" + description + ", \n\tquantity=" + quantity
+				+ ", \n\timages=" + images + ", \n\tvariant=" + variant + "}";
 	}
-	
-	
+
+
 	public String getPriceAndDescription() {
 		return "\nPrice= "+price+
-				"\nDescription= "+description;
+				"\nDescription= "+description+"\n";
 	}
 	
 	

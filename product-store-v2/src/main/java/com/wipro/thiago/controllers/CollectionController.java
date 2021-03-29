@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.wipro.thiago.models.MainCollection;
+import com.wipro.thiago.models.Product;
 import com.wipro.thiago.models.SubCollection;
 
 public class CollectionController {
@@ -23,7 +24,6 @@ public class CollectionController {
 		String keyword;
 		List<String> keywords = new ArrayList<String>(6);
 
-		
 		while (true) {
 			try {
 				System.out.println("\n+++++++Provide Main Collection data+++++++\n");
@@ -73,12 +73,12 @@ public class CollectionController {
 		do {
 			try {
 				count.set(0);
-				System.out.println("Choose one Main Collection:\n" + mainCollectionList.size());
+				System.out.println("Choose one Main Collection:\n");
 				mainCollectionList.stream().forEach(
 						list -> System.out.println("[" + (count.getAndIncrement() + 1) + "] " + list.getName()));
 				option = scan.nextInt();
 			} catch (InputMismatchException e) {
-
+				scan.nextLine();
 				System.out.println("\n!!!Incorrect input.!!!");
 				continue;
 			}
@@ -133,6 +133,33 @@ public class CollectionController {
 
 	}
 
-	
+	public int listAllProductsByCollection(List<MainCollection> mainCollectionList) {
+		if (mainCollectionList.isEmpty())
+			return 0;
+		boolean isEmpty = false;
+		boolean noProduct;
+		for (MainCollection collection : mainCollectionList) {
+			isEmpty = collection.getSubCollection().isEmpty();
+		}
+		if (isEmpty)
+			return 0;
+		noProduct = mainCollectionList.stream()
+				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
+		if (noProduct)
+			return 2;
+
+		for (MainCollection main : mainCollectionList) {
+			System.out.println("Main Collection: " + main.getName());
+			for (SubCollection sub : main.getSubCollection()) {
+				System.out.println("Sub Collection: " + sub.getName());
+				for (Product product : sub.getProducts()) {
+					System.out.println("\n" + product);
+				}
+			}
+		}
+
+		System.out.println("\n");
+		return 1;
+	}
 
 }

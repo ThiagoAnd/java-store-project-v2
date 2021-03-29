@@ -134,10 +134,10 @@ public class Menu {
 			menuController.addProduct();
 			break;
 		case 2:
-			System.out.println("Listar produto");
+			menuController.listAllProducts();
 			break;
 		case 3:
-			System.out.println("Procurar produto");
+			menuController.getProduct();
 			break;
 		case 0:
 			break;
@@ -159,6 +159,10 @@ public class Menu {
 		case 3:
 			menuController.listMainCollections();
 			break;
+		case 4:
+			System.out.println("numero 4");
+		case 5:
+			System.out.println("numero 5");
 		case 0:
 			break;
 		default:

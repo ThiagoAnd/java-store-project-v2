@@ -9,8 +9,8 @@ public class TShirt extends Variant {
 	String size;
 	
 			
-	public TShirt(String name, String color, String gender, String sleeve, String size) {
-		super(name, color, gender);
+	public TShirt(String color, String gender, String sleeve, String size) {
+		super(color, gender);
 		this.sleeve = sleeve;
 		this.size = size;
 	}
@@ -20,6 +20,15 @@ public class TShirt extends Variant {
 	public void setSleeve(String sleeve) {
 		this.sleeve = sleeve;
 	}
+	@Override
+	public String toString() {
+		return "TShirt {\n\t\t\tsleeve=" + sleeve + ", \n\t\t\tsize=" + size + ", \n\t\t\tcolor=" + getColor() + ", \n\t\t\tgender="
+				+ getGender() + "\n\t}\n";
+	}
+	
+	
+	
+	
 
 	
 	
