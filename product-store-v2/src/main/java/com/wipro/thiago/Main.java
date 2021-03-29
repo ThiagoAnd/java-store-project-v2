@@ -1,20 +1,18 @@
 package com.wipro.thiago;
 
-import com.wipro.thiago.enums.SleeveType;
-import com.wipro.thiago.models.TShirt;
-import com.wipro.thiago.models.Variant;
+import java.util.Scanner;
+
+import com.wipro.thiago.models.Collection;
+import com.wipro.thiago.models.MainCollection;
+import com.wipro.thiago.models.SubCollection;
+import com.wipro.thiago.utils.Menu;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		System.out.println("asadddsdfaswwwww");
 
-		SleeveType x = SleeveType.LONG;
-		
-		System.out.println(x.getType());
-		
-	
+		 new Menu().startMenu();
+
+
 	}
-
 }
