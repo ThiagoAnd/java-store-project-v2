@@ -2,7 +2,7 @@ package com.wipro.thiago.models;
 
 
 
-public class Variant {
+public abstract class Variant {
 	
 
 

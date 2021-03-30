@@ -18,7 +18,7 @@ public class MainCollection extends Collection{
 		return subCollection;
 	}
 
-	public void setSubCollection(List<SubCollection> subCollection) {
+	public void setSubCollection(ArrayList<SubCollection> subCollection) {
 		this.subCollection = subCollection;
 	}
 

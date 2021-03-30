@@ -42,7 +42,7 @@ public class ProductController {
 		case "tshirt":
 			while (true) {
 				try {
-					System.out.print("Choose t-shirt color: ");
+					System.out.print("\nChoose t-shirt color: ");
 					tempColor = scan.nextLine();
 					
 					do {
@@ -94,7 +94,7 @@ public class ProductController {
 			while (true) {
 				try {
 
-					System.out.print("Choose sneakers color: ");
+					System.out.print("\nChoose sneakers color: ");
 					tempColor = scan.nextLine();
 					do {
 						System.out.print("\nChoose sneakers size(30 - 48): ");
@@ -121,18 +121,19 @@ public class ProductController {
 					
 					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
-				}
-				;
+				};
+				
 				break;
 			}
 
 			return new Sneaker(tempColor, tempGender, tempSizeInNumber, tempActivity);
+			
 
 		case "pants":
 			while (true) {
 				try {
 
-					System.out.print("Choose pants color: ");
+					System.out.print("\nChoose pants color: ");
 					tempColor = scan.nextLine();
 
 					System.out.print("\nChoose pants size: ");
@@ -369,7 +370,7 @@ public class ProductController {
 			}
 			break;
 		}
-		scan.nextLine();
+		
 
 		boolean haveProduct = false;
 		for (int i = 0; i < mainCollectionList.size(); i++) {

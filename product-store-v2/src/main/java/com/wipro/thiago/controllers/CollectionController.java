@@ -17,7 +17,8 @@ public class CollectionController {
 	public CollectionController() {
 		this.scan = new Scanner(System.in);
 	}
-
+	
+	
 	public boolean addCollection(List<MainCollection> mainCollectionList) {
 		String tempName;
 		String tempDescription;
@@ -37,8 +38,10 @@ public class CollectionController {
 				for (int i = 0; i < 6; i++) {
 					System.out.print("Choose the keyword " + (i + 1) + "( type 0 to finish ):");
 					keyword = scan.nextLine();
+					
 					if (keyword.equals("0"))
 						break;
+					
 					keywords.add(keyword);
 				}
 
@@ -60,8 +63,6 @@ public class CollectionController {
 	}
 
 	public int addSubCollection(List<MainCollection> mainCollectionList) {
-		if (mainCollectionList.isEmpty())
-			return 0;
 
 		String tempName;
 		String tempDescription;
@@ -69,6 +70,9 @@ public class CollectionController {
 		List<String> keywords = new ArrayList<String>(6);
 		AtomicInteger count = new AtomicInteger();
 		int option = -1;
+		
+		if (mainCollectionList.isEmpty())
+			return 0;
 
 		do {
 			try {
@@ -78,13 +82,16 @@ public class CollectionController {
 						list -> System.out.println("[" + (count.getAndIncrement() + 1) + "] " + list.getName()));
 				System.out.print("Choose an option: ");
 				option = scan.nextInt();
+				
 			} catch (InputMismatchException e) {
 				scan.nextLine();
+				
 				System.out.println("\n!!!Incorrect input.!!!");
 				continue;
 			}
 		} while (option < 1 || option > mainCollectionList.size());
 		scan.nextLine();
+		
 		while (true) {
 			try {
 				System.out.println("\n+++++++Provide Sub Collection data+++++++\n");
@@ -98,8 +105,10 @@ public class CollectionController {
 				for (int i = 0; i < 6; i++) {
 					System.out.println("Choose the keyword " + (i + 1) + "( type 0 to finish ):");
 					keyword = scan.nextLine();
+					
 					if (keyword.equals("0"))
 						break;
+					
 					keywords.add(keyword);
 				}
 
@@ -121,11 +130,34 @@ public class CollectionController {
 
 	}
 
+	public int verifyCollectionAndProduct(List<MainCollection> mainCollectionList) {
+
+		boolean noProduct;
+		boolean isEmpty = false;
+
+		if (mainCollectionList.isEmpty())
+			return 0;
+
+		for (MainCollection collection : mainCollectionList) {
+			isEmpty = collection.getSubCollection().isEmpty();
+		}
+
+		if (isEmpty)
+			return 0;
+
+		noProduct = mainCollectionList.stream()
+				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
+		
+		if (noProduct)
+			return 2;
+
+		return 1;
+	}
+
 	public boolean listCollections(List<MainCollection> mainCollectionList) {
 		if (mainCollectionList.isEmpty())
 			return false;
 
-		
 		mainCollectionList.stream().forEach(list -> {
 			System.out.println("\nMain Collection: " + list.getName());
 			list.getSubCollection().stream()
@@ -136,27 +168,23 @@ public class CollectionController {
 	}
 
 	public int listAllProductsByCollection(List<MainCollection> mainCollectionList) {
-		if (mainCollectionList.isEmpty())
-			return 0;
-		boolean isEmpty = false;
-		boolean noProduct;
-		for (MainCollection collection : mainCollectionList) {
-			isEmpty = collection.getSubCollection().isEmpty();
-		}
-		if (isEmpty)
-			return 0;
-		noProduct = mainCollectionList.stream()
-				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
-		if (noProduct)
-			return 2;
+		
+		int condition;
+		
+		condition = verifyCollectionAndProduct(mainCollectionList);
+		
+		if(condition!=1)
+			return condition;
 
 		for (MainCollection main : mainCollectionList) {
-			System.out.println("Main Collection: " + main.getName());
+			System.out.println("\nMain Collection: " + main.getName());
 			for (SubCollection sub : main.getSubCollection()) {
 				System.out.println("Sub Collection: " + sub.getName());
 				for (Product product : sub.getProducts()) {
 					System.out.println("\n" + product);
 				}
+				if(sub.getProducts().isEmpty())
+					System.out.println("\tEmpty Sub Collection");
 			}
 		}
 
@@ -166,32 +194,25 @@ public class CollectionController {
 
 	public int searchProductInSubCollection(List<MainCollection> mainCollectionList) {
 
-		if (mainCollectionList.isEmpty())
-			return 0;
-		boolean isEmpty = false;
-		boolean noProduct;
-		for (MainCollection collection : mainCollectionList) {
-			isEmpty = collection.getSubCollection().isEmpty();
-		}
-		if (isEmpty)
-			return 0;
-		noProduct = mainCollectionList.stream()
-				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
-		if (noProduct)
-			return 2;
-
 		int mainCollectionOption = -1;
 		int subCollectionOption = -1;
+		int condition;
 		String tempName;
 		AtomicInteger mainCount = new AtomicInteger();
 		AtomicInteger subCount = new AtomicInteger();
+		boolean haveProduct;
+		
+		condition = verifyCollectionAndProduct(mainCollectionList);
+		
+		if(condition!=1)
+			return condition;
 
 		while (true) {
 
 			do {
 				try {
 					mainCount.set(0);
-					System.out.println("Choose a main collection: ");
+					System.out.println("\nChoose a main collection: ");
 					for (MainCollection main : mainCollectionList) {
 						System.out.println("[" + (mainCount.getAndIncrement() + 1) + "] - " + main.getName());
 					}
@@ -207,7 +228,7 @@ public class CollectionController {
 			do {
 				try {
 					subCount.set(0);
-					System.out.println("Choose a sub collection:");
+					System.out.println("\nChoose a sub collection:");
 					for (SubCollection sub : mainCollectionList.get(mainCollectionOption - 1).getSubCollection()) {
 						System.out.println("[" + (subCount.getAndIncrement() + 1) + "] - " + sub.getName());
 					}
@@ -216,6 +237,7 @@ public class CollectionController {
 
 				} catch (InputMismatchException e) {
 					scan.nextLine();
+					
 					System.out.println("\n!!!Incorrect input!!!");
 					continue;
 				}
@@ -223,24 +245,24 @@ public class CollectionController {
 			} while (subCollectionOption < 1 || subCollectionOption > mainCollectionList.get(mainCollectionOption - 1)
 					.getSubCollection().size());
 			scan.nextLine();
+			
 			System.out.print("Please, type the product name: ");
 			tempName = scan.nextLine();
 			break;
 		}
-		boolean haveProduct = mainCollectionList.get(mainCollectionOption - 1).getSubCollection()
+		 haveProduct = mainCollectionList.get(mainCollectionOption - 1).getSubCollection()
 				.get(subCollectionOption - 1).getProducts().stream()
 				.anyMatch(p -> p.getName().equalsIgnoreCase(tempName));
 
+		
 		if (!haveProduct)
 			return 3;
-
-		mainCollectionList.get(mainCollectionOption - 1).getSubCollection()
-		.get(subCollectionOption - 1).getProducts().stream().forEach(System.out::println);
+		System.out.println("\nFound a product with that name:\n");
+		mainCollectionList.get(mainCollectionOption - 1).getSubCollection().get(subCollectionOption - 1).getProducts()
+				.stream().filter(p -> p.getName().equalsIgnoreCase(tempName)).forEach(System.out::println);
 		System.out.println("\n");
 
 		return 1;
 	}
-
-	
 
 }
