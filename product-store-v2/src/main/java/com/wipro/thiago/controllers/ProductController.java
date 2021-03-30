@@ -1,13 +1,10 @@
 package com.wipro.thiago.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import com.wipro.thiago.enums.Gender;
 import com.wipro.thiago.enums.SleeveType;
@@ -30,6 +27,7 @@ public class ProductController {
 	}
 
 	public Variant addSubVariant(String subVariant) {
+		
 		String tempColor;
 		String tempSize;
 		String tempMaterial;
@@ -39,39 +37,51 @@ public class ProductController {
 		int subVariantOption = -1;
 		int tempSizeInNumber;
 		scan.nextLine();
+		
 		switch (subVariant) {
 		case "tshirt":
 			while (true) {
 				try {
 					System.out.print("Choose t-shirt color: ");
 					tempColor = scan.nextLine();
+					
 					do {
 						System.out.println("\nChoose t-shirt size: ");
 						for (TShirtSize size : TShirtSize.values()) {
 							System.out.println("[" + size.getIndex() + "] " + size.getSize());
 						}
 						subVariantOption = scan.nextInt();
+						
 					} while (subVariantOption < 1 || subVariantOption > TShirtSize.values().length);
+					
 					tempSize = TShirtSize.values()[subVariantOption - 1].getSize();
 					subVariantOption = -1;
+					
 					do {
 						System.out.println("\nChoose gender: ");
 						System.out.println("[1] " + Gender.M.name());
 						System.out.println("[2] " + Gender.F.name());
 						subVariantOption = scan.nextInt();
+						
 					} while (subVariantOption < 1 || subVariantOption > 2);
+					
 					tempGender = Gender.values()[subVariantOption - 1].getGender();
 					subVariantOption = -1;
+					
 					do {
 						System.out.println("\nChoose Sleeve type");
 						System.out.println("[1] " + SleeveType.LONG.getType());
 						System.out.println("[2] " + SleeveType.SHORT.getType());
 						subVariantOption = scan.nextInt();
+						
 					} while (subVariantOption < 1 || subVariantOption > 2);
+					
 					tempSleeveType = SleeveType.values()[subVariantOption - 1].getType();
+					
 				} catch (InputMismatchException e) {
 					scan.nextLine();
-					System.out.println("\n!!!Incorrect input!!!");
+					
+					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
 				}
 				;
@@ -89,6 +99,7 @@ public class ProductController {
 					do {
 						System.out.print("\nChoose sneakers size(30 - 48): ");
 						tempSizeInNumber = scan.nextInt();
+						
 					} while (tempSizeInNumber < 30 || tempSizeInNumber > 48);
 
 					subVariantOption = -1;
@@ -97,16 +108,18 @@ public class ProductController {
 						System.out.println("[1] " + Gender.M.name());
 						System.out.println("[2] " + Gender.F.name());
 						subVariantOption = scan.nextInt();
+						
 					} while (subVariantOption < 1 || subVariantOption > 2);
 					tempGender = Gender.values()[subVariantOption - 1].getGender();
 					scan.nextLine();
-					System.out.print("Choose activity:");
+					
+					System.out.print("\nChoose activity: ");
 					tempActivity = scan.nextLine();
-					System.out.println("a atividade escolhida foi " + tempActivity);
-
+					
 				} catch (InputMismatchException e) {
 					scan.nextLine();
-					System.out.println("\n!!!Incorrect input!!!");
+					
+					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
 				}
 				;
@@ -131,18 +144,22 @@ public class ProductController {
 						System.out.println("[1] " + Gender.M.name());
 						System.out.println("[2] " + Gender.F.name());
 						subVariantOption = scan.nextInt();
+						
 					} while (subVariantOption < 1 || subVariantOption > 2);
+					
 					tempGender = Gender.values()[subVariantOption - 1].getGender();
 					scan.nextLine();
-					System.out.print("Choose activity:");
+					
+					System.out.print("\nChoose activity: ");
 					tempActivity = scan.nextLine();
 
-					System.out.print("Choose material: ");
+					System.out.print("\nChoose material: ");
 					tempMaterial = scan.nextLine();
 
 				} catch (InputMismatchException e) {
 					scan.nextLine();
-					System.out.println("\n!!!Incorrect input!!!");
+					
+					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
 				}
 				;
@@ -158,15 +175,19 @@ public class ProductController {
 	}
 
 	public Variant addVariant() {
+		
 		int variantOption = -1;
+		
 		do {
 			try {
 				System.out.println("\nChoose a variant for the product. ");
 				System.out.println("[1] T-Shirt\n[2] Sneakers\n[3] Pants\n[4] Do not choose a variant");
 				variantOption = scan.nextInt();
+				
 			} catch (InputMismatchException e) {
 				scan.nextLine();
-				System.out.println("\n!!!Incorrect input!!!");
+				
+				System.out.println("\n!!!Incorrect input!!!\n");
 				continue;
 			}
 		} while (variantOption < 1 || variantOption > 4);
@@ -188,6 +209,7 @@ public class ProductController {
 	}
 
 	public List<Integer> getCollectionForProduct(List<MainCollection> mainCollectionList) {
+		
 		List<Integer> indexes = new ArrayList<Integer>();
 		int mainCollectionOption = -1;
 		int subCollectionOption = -1;
@@ -199,19 +221,24 @@ public class ProductController {
 			do {
 				try {
 					mainCount.set(0);
-					System.out.println("Choose a main collection for the product. ");
+					System.out.println("\nChoose a main collection for the product.\n");
 					for (MainCollection main : mainCollectionList) {
 						System.out.println("[" + (mainCount.getAndIncrement() + 1) + "] - " + main.getName());
 					}
+					
 					mainCollectionOption = scan.nextInt();
+					
 				} catch (InputMismatchException e) {
 					scan.nextLine();
-					System.out.println("\n!!!Incorrect input!!!");
+					
+					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
 				}
 
 			} while (mainCollectionOption < 1 || mainCollectionOption > mainCollectionList.size());
+			
 			System.out.println("\n");
+			
 			do {
 				try {
 					subCount.set(0);
@@ -224,7 +251,8 @@ public class ProductController {
 
 				} catch (InputMismatchException e) {
 					scan.nextLine();
-					System.out.println("\n!!!Incorrect input!!!");
+					
+					System.out.println("\n!!!Incorrect input!!!\n");
 					continue;
 				}
 
@@ -232,22 +260,40 @@ public class ProductController {
 					.getSubCollection().size());
 			break;
 		}
+		
 		indexes.add(mainCollectionOption);
 		indexes.add(subCollectionOption);
 
 		return indexes;
 	}
+	
+	public int verifyCollectionAndProduct(List<MainCollection> mainCollectionList) {
+		
+		boolean noProduct;
+		boolean isEmpty = false;
 
-	public int addProduct(List<MainCollection> mainCollectionList) {
 		if (mainCollectionList.isEmpty())
 			return 0;
-		boolean isEmpty = false;
+		
 		for (MainCollection collection : mainCollectionList) {
 			isEmpty = collection.getSubCollection().isEmpty();
 		}
+		
 		if (isEmpty)
 			return 0;
+		
+		noProduct = mainCollectionList.stream()
+				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
+		
+		if (noProduct)
+			return 2;
+		
+		return 1;
+	}
 
+	public int addProduct(List<MainCollection> mainCollectionList) {
+		
+		int condition;
 		String tempName = "";
 		double tempPrice;
 		String tempDescription;
@@ -260,6 +306,11 @@ public class ProductController {
 		int tempImageSize;
 		List<Integer> indexes;
 		Variant variant;
+		
+		condition = verifyCollectionAndProduct(mainCollectionList);
+		if(condition==0)
+			return 0;
+		
 
 		indexes = getCollectionForProduct(mainCollectionList);
 
@@ -283,30 +334,37 @@ public class ProductController {
 
 				scan.nextLine();
 				do {
-				System.out.println("\nHow many images do you want to add?(0-5): ");
-				imageQty = scan.nextInt();
-				scan.nextLine();
-				}while(imageQty<0 || imageQty>5);
-				
-				for (int i = 0; i < imageQty; i++) {
-					System.out.print("\nChoose image "+(i+1)+" name: ");
-					tempImageName = scan.nextLine();
-					System.out.print("\nChoose image "+(i+1)+" extension: ");
-					tempImageExtension = scan.nextLine(); 
-					System.out.print("\nChoose image "+(i+1)+" path: ");
-					tempImagePath = scan.nextLine(); 
-					System.out.print("\nChoose image "+(i+1)+" size(MB): ");
-					tempImageSize = scan.nextInt();
-					scan.nextLine();
-					images.add(new Image(tempImageName, tempImageSize, tempImagePath, tempImageExtension));
+					System.out.println("\nHow many images do you want to add?(0-5): ");
+					imageQty = scan.nextInt();
 					
+					scan.nextLine();
+				} while (imageQty < 0 || imageQty > 5);
+
+				for (int i = 0; i < imageQty; i++) {
+					System.out.print("\nChoose image " + (i + 1) + " name: ");
+					tempImageName = scan.nextLine();
+					
+					System.out.print("\nChoose image " + (i + 1) + " extension: ");
+					tempImageExtension = scan.nextLine();
+					
+					System.out.print("\nChoose image " + (i + 1) + " path: ");
+					tempImagePath = scan.nextLine();
+					
+					System.out.print("\nChoose image " + (i + 1) + " size(MB): ");
+					tempImageSize = scan.nextInt();
+					
+					scan.nextLine();
+					
+					images.add(new Image(tempImageName, tempImageSize, tempImagePath, tempImageExtension));
+
 				}
 
 				variant = addVariant();
 
 			} catch (InputMismatchException e) {
 				scan.nextLine();
-				System.out.println("\n!!!Incorrect input.(DOUBLE for price and INT for quantity)!!!");
+				
+				System.out.println("\n!!!Incorrect input.(DOUBLE for price and INT for quantity and INT for size)!!!");
 				continue;
 			}
 			break;
@@ -317,6 +375,7 @@ public class ProductController {
 		for (int i = 0; i < mainCollectionList.size(); i++) {
 			for (int j = 0; j < mainCollectionList.get(i).getSubCollection().size(); j++) {
 				for (int k = 0; k < mainCollectionList.get(i).getSubCollection().get(j).getProducts().size(); k++) {
+					
 					if (mainCollectionList.get(i).getSubCollection().get(j).getProducts().get(k).getName()
 							.equalsIgnoreCase(tempName))
 						haveProduct = true;
@@ -326,6 +385,7 @@ public class ProductController {
 			}
 
 		}
+		
 		if (haveProduct)
 			return 2;
 
@@ -337,30 +397,30 @@ public class ProductController {
 		if (mainCollectionList.get(indexes.get(0) - 1).getSubCollection().get(indexes.get(1) - 1).getProducts()
 				.contains(product))
 			return 1;
+		
 		return 3;
 
 	}
 
 	public int getProduct(List<MainCollection> mainCollectionList) {
-		if (mainCollectionList.isEmpty())
-			return 0;
-		boolean isEmpty = false;
-		for (MainCollection collection : mainCollectionList) {
-			isEmpty = collection.getSubCollection().isEmpty();
-		}
-		if (isEmpty)
-			return 0;
-
+	
 		boolean haveProduct;
 		String tempName;
+		int condition;
 
-		System.out.print("Please, type the product name: ");
+		condition = verifyCollectionAndProduct(mainCollectionList);
+		
+		if(condition!=1)
+			return condition;
+
+		System.out.print("\nPlease, type the product name: ");
 		tempName = scan.nextLine();
 
 		haveProduct = mainCollectionList.stream().anyMatch(main -> main.getSubCollection().stream()
 				.anyMatch(sub -> sub.getProducts().stream().anyMatch(p -> p.getName().equalsIgnoreCase(tempName))));
+		
 		if (!haveProduct)
-			return 2;
+			return 3;
 
 		mainCollectionList.stream()
 				.forEach(main -> main.getSubCollection().stream()
@@ -372,23 +432,19 @@ public class ProductController {
 	}
 
 	public int listAllProducts(List<MainCollection> mainCollectionList) {
-		if (mainCollectionList.isEmpty())
-			return 0;
-		boolean isEmpty = false;
-		boolean noProduct;
-		for (MainCollection collection : mainCollectionList) {
-			isEmpty = collection.getSubCollection().isEmpty();
-		}
-		if (isEmpty)
-			return 0;
-		noProduct = mainCollectionList.stream()
-				.allMatch(main -> main.getSubCollection().stream().allMatch(sub -> sub.getProducts().isEmpty()));
-		if (noProduct)
-			return 2;
+		
+		int condition;
+		
+		condition = verifyCollectionAndProduct(mainCollectionList);
+		
+		if(condition!=1)
+			return condition;
 
 		mainCollectionList.stream().forEach(main -> main.getSubCollection().stream()
 				.forEach(sub -> sub.getProducts().stream().forEach(p -> System.out.println("\n" + p.toString()))));
+		
 		System.out.println("\n");
+		
 		return 1;
 	}
 

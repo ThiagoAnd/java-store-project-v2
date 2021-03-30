@@ -43,7 +43,7 @@ public class Pants extends Variant {
 
 	@Override
 	public String toString() {
-		return "Sneaker {\n\t\t\tsize=" + size + ",\n\t\t\tcolor=" + getColor() +"\n\t\t\tmaterial="+material+ ",\n\t\t\tactivity=" + activity
+		return "Pants {\n\t\t\tsize=" + size + ",\n\t\t\tcolor=" + getColor() +"\n\t\t\tmaterial="+material+ ",\n\t\t\tactivity=" + activity
 				+ ", \n\t\t\tgender=" + getGender() + "\n\t}\n";
 	}
 	

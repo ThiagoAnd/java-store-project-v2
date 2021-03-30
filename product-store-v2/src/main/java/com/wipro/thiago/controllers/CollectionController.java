@@ -73,9 +73,10 @@ public class CollectionController {
 		do {
 			try {
 				count.set(0);
-				System.out.println("Choose one Main Collection:\n");
+				System.out.println("\n+++++Main Collections+++++\n");
 				mainCollectionList.stream().forEach(
 						list -> System.out.println("[" + (count.getAndIncrement() + 1) + "] " + list.getName()));
+				System.out.print("Choose an option: ");
 				option = scan.nextInt();
 			} catch (InputMismatchException e) {
 				scan.nextLine();
@@ -124,8 +125,9 @@ public class CollectionController {
 		if (mainCollectionList.isEmpty())
 			return false;
 
+		
 		mainCollectionList.stream().forEach(list -> {
-			System.out.println("Main Collection: " + list.getName());
+			System.out.println("\nMain Collection: " + list.getName());
 			list.getSubCollection().stream()
 					.forEach(subList -> System.out.println("\tSub Collection: " + subList.getName()));
 		});

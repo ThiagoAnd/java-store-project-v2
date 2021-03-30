@@ -90,7 +90,7 @@ public class MenuController {
 		else if (response == 1)
 			System.out.println("\nProduct added");
 		else if (response == 2)
-			System.out.println("\nThe product is already added in a sub collection");
+			System.out.println("\nA product whit this name had already been added to a sub collection");
 		else
 			System.out.println("\nError on saving product");
 		System.out.println("Press ENTER to continue");
@@ -102,8 +102,11 @@ public class MenuController {
 
 		if (response == 0)
 			System.out.println("\nPlease save at least one Main Collection and a Sub Collection before proceeding");
-		else if (response == 2)
+		else if (response == 3)
 			System.out.println("\nNo product with this name");
+		else if (response == 2)
+			System.out.println("\nThere is no product added");
+		
 		System.out.println("Press ENTER to continue");
 		scan.nextLine();
 	}

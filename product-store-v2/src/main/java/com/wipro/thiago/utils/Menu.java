@@ -8,9 +8,8 @@ import com.wipro.thiago.controllers.MenuController;
 public class Menu {
 
 	private Scanner scan;
-	
+
 	private MenuController menuController;
-	
 
 	public Menu() {
 		this.scan = new Scanner(System.in);
@@ -24,7 +23,6 @@ public class Menu {
 		do {
 			option = getMainMenuOption();
 			showSubMenuOption(option);
-			
 
 		} while (option != 0);
 		scan.close();
@@ -36,10 +34,11 @@ public class Menu {
 
 		do {
 			try {
-				System.out.println("+++++++++++THIAGO STORE+++++++++++++++++++");
-				System.out.println("[1] Product Management");
+				System.out.println("\n+++++++++++THIAGO STORE+++++++++++++++++++");
+				System.out.println("\n[1] Product Management");
 				System.out.println("[2] Collection Management");
 				System.out.println("[0] Exit program");
+				System.out.print("Choose an option: ");
 				number = scan.nextInt();
 				if (number < 0 || number > 2) {
 					System.out.println("\n!!!Choose 0 to 2!!!\n");
@@ -68,9 +67,7 @@ public class Menu {
 				number = getCollectiontMenuOption();
 				executeCollectionOption(number);
 			} while (number != 0);
-
 		} else {
-			scan.close();
 			System.out.println("Program terminated.");
 		}
 
@@ -81,10 +78,11 @@ public class Menu {
 
 		do {
 			try {
-				System.out.println("[1] Add product");
+				System.out.println("\n[1] Add product");
 				System.out.println("[2] List all the products");
 				System.out.println("[3] Search for product");
 				System.out.println("[0] back");
+				System.out.print("Choose an option: ");
 				number = scan.nextInt();
 				if (number < 0 || number > 3) {
 					System.out.println("\n!!!Choose 0 to 3!!!\n");
@@ -105,12 +103,13 @@ public class Menu {
 
 		do {
 			try {
-				System.out.println("[1] Add new Main Collection");
+				System.out.println("\n[1] Add new Main Collection");
 				System.out.println("[2] Add new sub-collection to main collection");
 				System.out.println("[3] List Collections");
 				System.out.println("[4] Search for product in a sub-collection");
 				System.out.println("[5] List for products in a Collection");
 				System.out.println("[0] voltar");
+				System.out.print("Choose an option: ");
 				number = scan.nextInt();
 				if (number < 0 || number > 5) {
 					System.out.println("\n!!!Choose 0 to 5!!!\n");
