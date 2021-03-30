@@ -58,6 +58,28 @@ public class MenuController {
 
 	}
 
+	public void listAllProductsByCollection() {
+		response = collectionController.listAllProductsByCollection(mainCollectionList);
+		if (response == 0)
+			System.out.println("\nPlease save at least one Main Collection and a Sub Collection before proceeding");
+		else if (response == 2)
+			System.out.println("\nThere is no product added");
+		System.out.println("Press ENTER to continue");
+		scan.nextLine();
+	}
+
+	public void searchProductInSubCollection() {
+		response = collectionController.searchProductInSubCollection(mainCollectionList);
+		if (response == 0)
+			System.out.println("\nPlease save at least one Main Collection and a Sub Collection before proceeding");
+		else if (response == 2)
+			System.out.println("\nThere is no product added");
+		else if (response == 3)
+			System.out.println("\nNo product with this name");
+		System.out.println("Press ENTER to continue");
+		scan.nextLine();
+	}
+
 	// Product methods
 
 	public void addProduct() {
@@ -88,14 +110,14 @@ public class MenuController {
 
 	public void listAllProducts() {
 		response = productController.listAllProducts(mainCollectionList);
-		
+
 		if (response == 0)
 			System.out.println("\nPlease save at least one Main Collection and a Sub Collection before proceeding");
 		else if (response == 2)
 			System.out.println("\nThere is no product added");
 		System.out.println("Press ENTER to continue");
 		scan.nextLine();
-		
+
 	}
 
 }

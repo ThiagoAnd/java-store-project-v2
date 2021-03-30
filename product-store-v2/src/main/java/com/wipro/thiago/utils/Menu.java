@@ -160,9 +160,11 @@ public class Menu {
 			menuController.listMainCollections();
 			break;
 		case 4:
-			System.out.println("numero 4");
+			menuController.searchProductInSubCollection();
+			break;
 		case 5:
-			System.out.println("numero 5");
+			menuController.listAllProductsByCollection();
+			break;
 		case 0:
 			break;
 		default:
