@@ -149,29 +149,7 @@ class CollectionControllerTest {
 
 	}
 	
-	@Test
-	void should_ReturnOne_When_FindProductInCollection() {
-
-		// given
-
-		List<MainCollection> mainCollectionList = new ArrayList<MainCollection>();
-		mainCollectionList.add(new MainCollection(null, null, null));
-		mainCollectionList.get(0).setSubCollection(new ArrayList<SubCollection>());
-		mainCollectionList.get(0).getSubCollection().add(new SubCollection(null, null, null));
-		mainCollectionList.get(0).getSubCollection().get(0).setProducts(new ArrayList<Product>());
-		mainCollectionList.get(0).getSubCollection().get(0).getProducts().add(new Product("x", 0, null, 0, null, null));
-
-		int result;
-
-		// when
-		
-		result = collectionController.searchProductInSubCollection(mainCollectionList);
-
-		// then
-
-		assertTrue(1 == result);
-
-	}
+	
 	
 	
 

@@ -177,7 +177,7 @@ public class CollectionController {
 			return condition;
 
 		for (MainCollection main : mainCollectionList) {
-			System.out.println("\nMain Collection: " + main.getName());
+			System.out.println("\n---------------------------------------\nMain Collection: " + main.getName());
 			for (SubCollection sub : main.getSubCollection()) {
 				System.out.println("Sub Collection: " + sub.getName());
 				for (Product product : sub.getProducts()) {
@@ -186,9 +186,9 @@ public class CollectionController {
 				if(sub.getProducts().isEmpty())
 					System.out.println("\tEmpty Sub Collection");
 			}
+			System.out.println("\n");
 		}
 
-		System.out.println("\n");
 		return 1;
 	}
 
